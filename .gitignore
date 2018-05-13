@@ -1,0 +1,7 @@
+.DS_Store
+db.sqlite3
+htmlcov
+cover
+.coverage
+venv
+__pycache__

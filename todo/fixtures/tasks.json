@@ -1,0 +1,42 @@
+[
+    {
+        "model": "todo.task",
+        "pk": 1,
+        "fields": {
+            "name": "Cut grass",
+            "description": "Cut the grass at the back of the house",
+            "status": 0,
+            "owner": 1
+        }
+    },
+    {
+        "model": "todo.task",
+        "pk": 2,
+        "fields": {
+            "name": "Paint fence",
+            "description": "The fence at the side of the house needs red paint",
+            "status": 0,
+            "owner": 1
+        }
+    },
+    {
+        "model": "todo.task",
+        "pk": 3,
+        "fields": {
+            "name": "Send letter",
+            "description": "Post a letter to the bank",
+            "status": 0,
+            "owner": 2
+        }
+    },
+    {
+        "model": "todo.task",
+        "pk": 4,
+        "fields": {
+            "name": "Feed cat",
+            "description": "She needs to eat her special Meow mix",
+            "status": 0,
+            "owner": 2
+        }
+    }
+]

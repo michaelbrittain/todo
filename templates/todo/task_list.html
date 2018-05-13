@@ -1,0 +1,61 @@
+{% extends "base.html" %}
+
+{% block content %}
+    <h2>Tasks</h2>
+    {% if not user.is_authenticated %}
+    <i>Note: you will need to login to add, edit or delete tasks</i>
+    {% endif %}
+
+    <div class="panel panel-default">
+      <div class="panel-heading">
+        <h3 class="panel-title">Filter by:</h3>
+      </div>
+      <div class="panel-body">
+        <a class="btn btn-default" href="/" role="button">Show All</a>
+        <a class="btn btn-default" href="/?status=0" role="button">Undone</a>
+        <a class="btn btn-default" href="/?status=1" role="button">Done</a>
+      </div>
+    </div>
+
+    <table class="table table-striped">
+        <thead>
+            <tr>
+                <th>Name</th>
+                <th>Description</th>
+                <th>Added By</th>
+                <th>Status</th>
+                <th>Completed By</th>
+                <th>Actions</th>
+                <th>&nbsp;</th>
+            </tr>
+        </thead>
+        <tbody> 
+        {% for task in object_list %}
+            <tr class="{% if task.is_done %}success{% else %}danger{% endif %}">
+                <td>{{ task.name }}</td>
+                <td>{{ task.description }}</td>
+                <td>{{ task.owner }}</td>
+                <td>{{ task.get_status_display }}</td>
+                {% if task.is_done %}
+                <td>{{ task.completed_by }} (at {{ task.completed }})</td>
+                {% else %}
+                <td>&nbsp;</td>
+                {% endif %}
+                <td>
+                    <a href="{% url "task_edit" task.id %}">edit</a>
+                    {% if task.owner == user %} | 
+                    <a href="{% url "task_delete" task.id %}">delete</a>
+                    {% endif %}
+                </td>
+                {% if task.is_done %}
+                <td>&nbsp;</td>
+                {% else %}
+                <td><a class="btn btn-default" href="{% url "task_done" task.id %}" role="button">Mark Done</a></td>
+                {% endif %}
+            </tr>
+        {% endfor %}
+        </tbody>
+    </table>
+
+    <a class="btn btn-default" href="{% url "task_new" %}" role="button">Add Task</a>
+{% endblock %}
