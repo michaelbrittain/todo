@@ -36,6 +36,13 @@ class TaskUpdate(LoginRequiredMixin, UpdateView):
     fields = ['name', 'description', 'status']
     login_url = '/login/'
 
+    # just to be sure, let's prevent non-owners from delete tasks here
+    def dispatch(self, request, *args, **kwargs):
+        task = self.get_object()
+        if task.owner != self.request.user:
+            raise PermissionDenied
+        return super(TaskUpdate, self).dispatch(request, *args, **kwargs)
+        
 
 class TaskDelete(LoginRequiredMixin, DeleteView):
     model = Task

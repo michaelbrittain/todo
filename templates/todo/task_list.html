@@ -42,9 +42,11 @@
                 <td>&nbsp;</td>
                 {% endif %}
                 <td>
-                    <a href="{% url "task_edit" task.id %}">edit</a>
-                    {% if task.owner == user %} | 
+                    {% if task.owner == user %}
+                    <a href="{% url "task_edit" task.id %}">edit</a> | 
                     <a href="{% url "task_delete" task.id %}">delete</a>
+                    {% else %}
+                    &nbsp;
                     {% endif %}
                 </td>
                 {% if task.is_done %}
